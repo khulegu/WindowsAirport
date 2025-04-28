@@ -35,11 +35,12 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             label1 = new Label();
             label2 = new Label();
+            label3 = new Label();
             SuspendLayout();
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(660, 55);
+            dateTimePicker1.Location = new Point(584, 55);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(400, 39);
             dateTimePicker1.TabIndex = 0;
@@ -56,19 +57,20 @@
             // comboBoxDest
             // 
             comboBoxDest.FormattingEnabled = true;
-            comboBoxDest.Location = new Point(385, 57);
+            comboBoxDest.Location = new Point(322, 57);
             comboBoxDest.Name = "comboBoxDest";
             comboBoxDest.Size = new Size(242, 40);
             comboBoxDest.TabIndex = 2;
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(1083, 48);
+            buttonSearch.Location = new Point(1160, 51);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(150, 46);
             buttonSearch.TabIndex = 3;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -89,17 +91,27 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(385, 22);
+            label2.Location = new Point(322, 22);
             label2.Name = "label2";
             label2.Size = new Size(136, 32);
             label2.TabIndex = 6;
             label2.Text = "Destination";
             // 
-            // Form1
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(584, 22);
+            label3.Name = "label3";
+            label3.Size = new Size(178, 32);
+            label3.TabIndex = 7;
+            label3.Text = "Departure Date";
+            // 
+            // SearchFlightForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1371, 810);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(flowLayoutPanel1);
@@ -107,7 +119,7 @@
             Controls.Add(comboBoxDest);
             Controls.Add(comboBoxSrc);
             Controls.Add(dateTimePicker1);
-            Name = "Form1";
+            Name = "SearchFlightForm";
             Text = "Form1";
             ResumeLayout(false);
             PerformLayout();
@@ -122,5 +134,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label1;
         private Label label2;
+        private Label label3;
     }
 }
