@@ -28,67 +28,114 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlightControl));
+            labelFlightNumber = new Label();
+            labelDepartureTime = new Label();
+            labelArrivalTime = new Label();
+            labelPrice = new Label();
+            pictureBox1 = new PictureBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // labelFlightNumber
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(38, 39);
-            label1.Name = "label1";
-            label1.Size = new Size(101, 32);
-            label1.TabIndex = 0;
-            label1.Text = "UBN123";
+            labelFlightNumber.Anchor = AnchorStyles.Left;
+            labelFlightNumber.AutoSize = true;
+            labelFlightNumber.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelFlightNumber.Location = new Point(3, 42);
+            labelFlightNumber.Name = "labelFlightNumber";
+            labelFlightNumber.Size = new Size(107, 32);
+            labelFlightNumber.TabIndex = 0;
+            labelFlightNumber.Text = "UBN123";
             // 
-            // label2
+            // labelDepartureTime
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(392, 39);
-            label2.Name = "label2";
-            label2.Size = new Size(71, 32);
-            label2.TabIndex = 1;
-            label2.Text = "18:00";
+            labelDepartureTime.Anchor = AnchorStyles.None;
+            labelDepartureTime.AutoSize = true;
+            labelDepartureTime.Location = new Point(692, 42);
+            labelDepartureTime.Name = "labelDepartureTime";
+            labelDepartureTime.Size = new Size(71, 32);
+            labelDepartureTime.TabIndex = 1;
+            labelDepartureTime.Text = "18:00";
             // 
-            // label3
+            // labelArrivalTime
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(502, 39);
-            label3.Name = "label3";
-            label3.Size = new Size(71, 32);
-            label3.TabIndex = 2;
-            label3.Text = "22:00";
+            labelArrivalTime.Anchor = AnchorStyles.None;
+            labelArrivalTime.AutoSize = true;
+            labelArrivalTime.Location = new Point(825, 42);
+            labelArrivalTime.Name = "labelArrivalTime";
+            labelArrivalTime.Size = new Size(71, 32);
+            labelArrivalTime.TabIndex = 2;
+            labelArrivalTime.Text = "22:00";
             // 
-            // label4
+            // labelPrice
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(783, 39);
-            label4.Name = "label4";
-            label4.Size = new Size(79, 32);
-            label4.TabIndex = 3;
-            label4.Text = "1800$";
+            labelPrice.Anchor = AnchorStyles.None;
+            labelPrice.AutoSize = true;
+            labelPrice.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelPrice.Location = new Point(902, 42);
+            labelPrice.Name = "labelPrice";
+            labelPrice.Size = new Size(84, 32);
+            labelPrice.TabIndex = 3;
+            labelPrice.Text = "1800$";
             // 
-            // UserControl1
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.InitialImage = null;
+            pictureBox1.Location = new Point(769, 33);
+            pictureBox1.MinimumSize = new Size(50, 50);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(50, 50);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 5;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.Controls.Add(labelFlightNumber, 0, 0);
+            tableLayoutPanel1.Controls.Add(labelPrice, 4, 0);
+            tableLayoutPanel1.Controls.Add(pictureBox1, 2, 0);
+            tableLayoutPanel1.Controls.Add(labelArrivalTime, 3, 0);
+            tableLayoutPanel1.Controls.Add(labelDepartureTime, 1, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(989, 116);
+            tableLayoutPanel1.TabIndex = 5;
+            // 
+            // FlightControl
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Name = "UserControl1";
-            Size = new Size(991, 118);
+            BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(tableLayoutPanel1);
+            Name = "FlightControl";
+            Size = new Size(989, 116);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
+        private Label labelFlightNumber;
+        private Label labelDepartureTime;
+        private Label labelArrivalTime;
+        private Label labelPrice;
+        private PictureBox pictureBox1;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }
