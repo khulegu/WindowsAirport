@@ -40,33 +40,37 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(584, 55);
+            dateTimePicker1.Location = new Point(359, 34);
+            dateTimePicker1.Margin = new Padding(2, 2, 2, 2);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(400, 39);
+            dateTimePicker1.Size = new Size(248, 27);
             dateTimePicker1.TabIndex = 0;
             // 
             // comboBoxSrc
             // 
             comboBoxSrc.FormattingEnabled = true;
-            comboBoxSrc.Location = new Point(61, 57);
+            comboBoxSrc.Location = new Point(38, 36);
+            comboBoxSrc.Margin = new Padding(2, 2, 2, 2);
             comboBoxSrc.Name = "comboBoxSrc";
-            comboBoxSrc.Size = new Size(242, 40);
+            comboBoxSrc.Size = new Size(150, 28);
             comboBoxSrc.TabIndex = 1;
             comboBoxSrc.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // comboBoxDest
             // 
             comboBoxDest.FormattingEnabled = true;
-            comboBoxDest.Location = new Point(322, 57);
+            comboBoxDest.Location = new Point(198, 36);
+            comboBoxDest.Margin = new Padding(2, 2, 2, 2);
             comboBoxDest.Name = "comboBoxDest";
-            comboBoxDest.Size = new Size(242, 40);
+            comboBoxDest.Size = new Size(150, 28);
             comboBoxDest.TabIndex = 2;
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(1160, 51);
+            buttonSearch.Location = new Point(714, 32);
+            buttonSearch.Margin = new Padding(2, 2, 2, 2);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(150, 46);
+            buttonSearch.Size = new Size(92, 29);
             buttonSearch.TabIndex = 3;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = true;
@@ -74,43 +78,47 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Location = new Point(61, 121);
+            flowLayoutPanel1.Location = new Point(38, 76);
+            flowLayoutPanel1.Margin = new Padding(2, 2, 2, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1249, 618);
+            flowLayoutPanel1.Size = new Size(769, 386);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(52, 22);
+            label1.Location = new Point(32, 14);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(87, 32);
+            label1.Size = new Size(54, 20);
             label1.TabIndex = 5;
             label1.Text = "Source";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(322, 22);
+            label2.Location = new Point(198, 14);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(136, 32);
+            label2.Size = new Size(85, 20);
             label2.TabIndex = 6;
             label2.Text = "Destination";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(584, 22);
+            label3.Location = new Point(359, 14);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(178, 32);
+            label3.Size = new Size(112, 20);
             label3.TabIndex = 7;
             label3.Text = "Departure Date";
             // 
             // SearchFlightForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1371, 810);
+            ClientSize = new Size(844, 506);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -119,6 +127,7 @@
             Controls.Add(comboBoxDest);
             Controls.Add(comboBoxSrc);
             Controls.Add(dateTimePicker1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "SearchFlightForm";
             Text = "Form1";
             ResumeLayout(false);

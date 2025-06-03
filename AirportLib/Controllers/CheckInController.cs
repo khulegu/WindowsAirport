@@ -26,14 +26,13 @@ public class CheckInController : ControllerBase
 
     [HttpGet("booking")]
     public async Task<IActionResult> GetBooking(
-        [FromQuery] int flightId,
         [FromQuery] string passportNumber
     )
     {
         if (string.IsNullOrWhiteSpace(passportNumber))
             return BadRequest("Passport number is required.");
 
-        var booking = await _checkInService.FindBookingByPassportAsync(flightId, passportNumber);
+        var booking = await _checkInService.FindBookingByPassportAsync(passportNumber);
         if (booking == null)
             return NotFound("Захиалга олдсонгүй эсвэл зорчигч бүртгүүлсэн байна.");
 
@@ -59,6 +58,26 @@ public class CheckInController : ControllerBase
         );
     }
 
+    [HttpGet("seats")]
+    public async Task<IActionResult> GetSeatMap([FromQuery] int flightId)
+    {
+        var flight = await _checkInService.GetFlightWithSeatsAsync(flightId);
+        if (flight == null || flight.Seats == null)
+            return NotFound("Flight or seats not found.");
+
+        var seatMap = flight.Seats.Select(s => new
+        {
+            s.SeatNumber,
+            s.IsOccupied,
+            PassengerName = s.AssignedPassenger != null
+                ? $"{s.AssignedPassenger.FirstName} {s.AssignedPassenger.LastName}"
+                : null,
+        });
+
+        return Ok(seatMap);
+    }
+
+
     [HttpPost("assignseat")]
     public async Task<IActionResult> AssignSeat([FromBody] AssignSeatRequest request)
     {
@@ -79,7 +98,6 @@ public class CheckInController : ControllerBase
         else if (!success)
         {
             var booking = await _checkInService.FindBookingByPassportAsync(
-                request.FlightId,
                 request.PassportNumber
             );
             if (booking != null)

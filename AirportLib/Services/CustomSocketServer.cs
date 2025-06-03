@@ -216,7 +216,6 @@ public class CustomSocketServer : BackgroundService
                             if (bookingPayload != null)
                             {
                                 var booking = await checkInService.FindBookingByPassportAsync(
-                                    bookingPayload.FlightId,
                                     bookingPayload.PassportNumber
                                 );
                                 if (booking != null)

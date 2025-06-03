@@ -89,12 +89,12 @@ namespace AirportLib.Services
             }
         }
 
-        public async Task<Booking?> FindBookingByPassportAsync(int flightId, string passportNumber)
+        public async Task<Booking?> FindBookingByPassportAsync( string passportNumber)
         {
             return await context
                 .Bookings.Include(b => b.Flight)
                 .FirstOrDefaultAsync(b =>
-                    b.FlightId == flightId && b.PassportNumber == passportNumber && !b.IsCheckedIn
+                    b.PassportNumber == passportNumber && !b.IsCheckedIn
                 );
         }
 
