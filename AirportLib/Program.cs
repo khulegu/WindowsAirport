@@ -1,6 +1,4 @@
-﻿using AirlineServer.Api.Services;
-using AirportLib.Data;
-using AirportLib.Hubs;
+﻿using AirportLib.Data;
 using AirportLib.Models;
 using AirportLib.Services; // Custom Socket Server Service
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +13,7 @@ builder.Services.AddScoped<FlightOperationsService>();
 builder.Services.AddScoped<PassengerService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSignalR();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -23,26 +22,6 @@ builder.Services.AddSwaggerGen(c =>
         new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Airport API", Version = "v1" }
     );
 });
-
-builder.Services.AddSignalR();
-
-// builder.Services.AddCors(options =>
-// {
-//     options.AddPolicy(
-//         "AllowSpecificOrigins",
-//         policy =>
-//         {
-//             policy
-//                 .WithOrigins("http://localhost:xxxx", "https://localhost:yyyy") // WinForms, Blazor app-ийн хаяг
-//                 .AllowAnyHeader()
-//                 .AllowAnyMethod()
-//                 .AllowCredentials(); // SignalR-д чухал
-//         }
-//     );
-// });
-
-// Custom Socket Server-ийг Background Service хэлбэрээр бүртгэх
-builder.Services.AddHostedService<CustomSocketServer>();
 
 var app = builder.Build();
 
@@ -122,10 +101,5 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers(); // REST API Controller-уудыг холбох
-
-// SignalR Hub-уудыг холбох
-app.MapHub<FlightInfoHub>("/flightInfoHub");
-
-// app.MapHub<CheckInHub>("/checkInHub"); // Суудал оноолтын мэдээллийг агент хооронд дамжуулах Hub (шаардлагатай бол)
-
+app.MapHub<FlightHub>("/flighthub");
 app.Run();

@@ -1,9 +1,7 @@
-// AirlineServer.Api/Controllers/FlightsController.cs
-using AirportLib.Data; // AppDbContext-ийг ашиглах
+using AirportLib.Data;
 using AirportLib.Models;
 using AirportLib.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AirportLib.Controllers;

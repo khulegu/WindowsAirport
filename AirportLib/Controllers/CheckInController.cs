@@ -1,5 +1,4 @@
 using AirportLib.Data;
-using AirportLib.Hubs;
 using AirportLib.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -9,15 +8,10 @@ namespace AirportLib.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CheckInController(
-    CheckInService checkInService,
-    IHubContext<FlightInfoHub, IFlightInfoClient> flightInfoHubContext,
-    AppDbContext dbContext
-) : ControllerBase
+public class CheckInController(CheckInService checkInService, AppDbContext dbContext)
+    : ControllerBase
 {
     private readonly CheckInService _checkInService = checkInService;
-    private readonly IHubContext<FlightInfoHub, IFlightInfoClient> _flightInfoHubContext =
-        flightInfoHubContext;
     private readonly AppDbContext _dbContext = dbContext;
 
     /// <summary>
@@ -100,18 +94,6 @@ public class CheckInController(
                 passengerName = booking.PassengerName;
         }
 
-        // SignalR-аар бусад клиентүүдэд мэдээлэх
-        await _flightInfoHubContext
-            .Clients.Group($"flight-agent-{request.FlightId}")
-            .BroadcastSeatUpdate(
-                request.FlightId,
-                request.SeatNumber,
-                request.PassportNumber,
-                passengerName,
-                success,
-                message
-            );
-
         // Мэдээллийн дэлгэцүүдэд суудлын газрын зургийг шинэчлэх (амжилттай бол)
         if (success)
         {
@@ -126,9 +108,6 @@ public class CheckInController(
                         ? $"{s.AssignedPassenger.FirstName} {s.AssignedPassenger.LastName}"
                         : null,
                 });
-                await _flightInfoHubContext
-                    .Clients.Group($"flight-display-{request.FlightId}")
-                    .ReceiveSeatMapUpdate(request.FlightId, seatMapDto);
             }
         }
 
