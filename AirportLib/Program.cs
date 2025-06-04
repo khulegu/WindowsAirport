@@ -3,22 +3,16 @@ using AirportLib.Data;
 using AirportLib.Hubs;
 using AirportLib.Models;
 using AirportLib.Services; // Custom Socket Server Service
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Service-үүдийг бүртгэх
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 builder.Services.AddScoped<CheckInService>();
 builder.Services.AddScoped<FlightOperationsService>();
-
+builder.Services.AddScoped<PassengerService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -120,13 +114,8 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// 2. HTTP request pipeline тохируулах
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigins"); // CORS policy-г идэвхжүүлэх
 app.UseRouting();

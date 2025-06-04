@@ -27,6 +27,10 @@ public class FlightsController : ControllerBase
         _context = context;
     }
 
+    /// <summary>
+    /// Нислэгүүдээс бүх нислэгийг авах
+    /// </summary>
+    /// <returns>Нислэгүүд</returns>
     [HttpGet]
     public async Task<IActionResult> GetAllFlights()
     {
@@ -46,6 +50,11 @@ public class FlightsController : ControllerBase
         return Ok(flights);
     }
 
+    /// <summary>
+    /// Нислэгийн мэдээллийг авах
+    /// </summary>
+    /// <param name="id">Нислэгийн ID</param>
+    /// <returns>Нислэгийн мэдээлэл</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetFlightDetails(int id)
     {
@@ -53,7 +62,6 @@ public class FlightsController : ControllerBase
         if (flight == null)
             return NotFound();
 
-        // DTO ашиглан зөвхөн шаардлагатай мэдээллийг буцаах нь зүйтэй
         var flightDetailsDto = new
         {
             flight.Id,
@@ -72,13 +80,19 @@ public class FlightsController : ControllerBase
                     PassengerName = s.AssignedPassenger != null
                         ? $"{s.AssignedPassenger.FirstName} {s.AssignedPassenger.LastName}"
                         : null,
-                    PassportNumber = s.AssignedPassenger?.PassportNumber,
+                    s.AssignedPassenger?.PassportNumber,
                 })
                 .ToList(),
         };
         return Ok(flightDetailsDto);
     }
 
+    /// <summary>
+    /// Нислэгийн төлөв өөрчлөх
+    /// </summary>
+    /// <param name="id">Нислэгийн ID</param>
+    /// <param name="request">Төлөв өөрчлөх мэдээлэл</param>
+    /// <returns>Амжилттай өөрчлөгдсөн эсэхийг илэрхийлнэ</returns>
     [HttpPut("{id}/status")]
     public async Task<IActionResult> UpdateFlightStatus(
         int id,

@@ -89,15 +89,23 @@ namespace AirportLib.Services
             }
         }
 
-        public async Task<Booking?> FindBookingByPassportAsync( string passportNumber)
+        /// <summary>
+        /// Паспортын дугаарын дагуу захиалгын мэдээллийг олох
+        /// </summary>
+        /// <param name="passportNumber">Зорчигчийн паспортын дугаар</param>
+        /// <returns>Захиалгын мэдээлэл</returns>
+        public async Task<Booking?> FindBookingByPassportAsync(string passportNumber)
         {
             return await context
                 .Bookings.Include(b => b.Flight)
-                .FirstOrDefaultAsync(b =>
-                    b.PassportNumber == passportNumber && !b.IsCheckedIn
-                );
+                .FirstOrDefaultAsync(b => b.PassportNumber == passportNumber && !b.IsCheckedIn);
         }
 
+        /// <summary>
+        /// Нислэгийн мэдээллийг олох
+        /// </summary>
+        /// <param name="flightId">Нислэгийн ID</param>
+        /// <returns>Нислэгийн мэдээлэл</returns>
         public async Task<Flight?> GetFlightWithSeatsAsync(int flightId)
         {
             return await context

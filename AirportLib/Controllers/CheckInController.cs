@@ -5,32 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
+namespace AirportLib.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
-public class CheckInController : ControllerBase
+public class CheckInController(
+    CheckInService checkInService,
+    IHubContext<FlightInfoHub, IFlightInfoClient> flightInfoHubContext,
+    AppDbContext dbContext
+) : ControllerBase
 {
-    private readonly CheckInService _checkInService;
-    private readonly IHubContext<FlightInfoHub, IFlightInfoClient> _flightInfoHubContext;
-    private readonly AppDbContext _dbContext;
+    private readonly CheckInService _checkInService = checkInService;
+    private readonly IHubContext<FlightInfoHub, IFlightInfoClient> _flightInfoHubContext =
+        flightInfoHubContext;
+    private readonly AppDbContext _dbContext = dbContext;
 
-    public CheckInController(
-        CheckInService checkInService,
-        IHubContext<FlightInfoHub, IFlightInfoClient> flightInfoHubContext,
-        AppDbContext dbContext
-    )
-    {
-        _checkInService = checkInService;
-        _flightInfoHubContext = flightInfoHubContext;
-        _dbContext = dbContext;
-    }
-
+    /// <summary>
+    /// Тийзний мэдээллийг авах
+    /// </summary>
+    /// <param name="passportNumber">Зорчигчийн паспортын дугаар</param>
+    /// <returns>Тийзний мэдээлэл</returns>
     [HttpGet("booking")]
-    public async Task<IActionResult> GetBooking(
-        [FromQuery] string passportNumber
-    )
+    public async Task<IActionResult> GetBooking([FromQuery] string passportNumber)
     {
         if (string.IsNullOrWhiteSpace(passportNumber))
-            return BadRequest("Passport number is required.");
+            return BadRequest("Паспортын дугаарын оруулна уу.");
 
         var booking = await _checkInService.FindBookingByPassportAsync(passportNumber);
         if (booking == null)
@@ -48,10 +47,10 @@ public class CheckInController : ControllerBase
                 booking.FlightId,
                 booking.Flight?.FlightNumber,
                 booking.PassportNumber,
-                booking.PassengerName, // Энэ нь захиалга дээрх нэр
+                booking.PassengerName,
                 PassengerDetails = passenger != null
                     ? new { passenger.FirstName, passenger.LastName }
-                    : null, // Паспорт дээрх нэр
+                    : null,
                 booking.IsCheckedIn,
                 booking.AssignedSeatNumber,
             }
@@ -77,7 +76,6 @@ public class CheckInController : ControllerBase
         return Ok(seatMap);
     }
 
-
     [HttpPost("assignseat")]
     public async Task<IActionResult> AssignSeat([FromBody] AssignSeatRequest request)
     {
@@ -97,9 +95,7 @@ public class CheckInController : ControllerBase
         }
         else if (!success)
         {
-            var booking = await _checkInService.FindBookingByPassportAsync(
-                request.PassportNumber
-            );
+            var booking = await _checkInService.FindBookingByPassportAsync(request.PassportNumber);
             if (booking != null)
                 passengerName = booking.PassengerName;
         }
