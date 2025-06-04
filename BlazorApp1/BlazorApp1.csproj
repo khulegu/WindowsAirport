@@ -7,8 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="DesktopGanjoorDbBrowser" Version="1.0.9" />
       <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
       <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.0-preview.4.25258.110" />
+      <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
     </ItemGroup>
 
     <ItemGroup>

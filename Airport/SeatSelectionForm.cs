@@ -17,7 +17,7 @@ namespace Airport
         private readonly int _flightId;
         private readonly string _passport;
 
-        public SeatSelectionForm(int flightId, string passport )
+        public SeatSelectionForm(int flightId, string passport)
         {
             InitializeComponent();
             _flightId = flightId;
@@ -61,7 +61,7 @@ namespace Airport
                     lblSelectedSeat.Text = $"Selected: {seat.SeatNumber}";
                 };
 
-                btn.Location = new Point((i % cols) * (size+margin), (i / cols) * (size + margin));
+                btn.Location = new Point((i % cols) * (size + margin), (i / cols) * (size + margin));
                 panelSeats.Controls.Add(btn);
             }
         }
@@ -72,6 +72,7 @@ namespace Airport
                 MessageBox.Show("Please select a seat first.");
                 return;
             }
+            MessageBox.Show($"Passport: {_passport}, FlightId: {_flightId}");
             var request = new AssignSeatRequest
             {
                 FlightId = _flightId,
@@ -97,13 +98,18 @@ namespace Airport
             {
                 MessageBox.Show("Flight not found");
             }
-            BoardingPassForm bpForm = new BoardingPassForm(updatedBooking,flight);
+            BoardingPassForm bpForm = new BoardingPassForm(updatedBooking, flight);
             bpForm.ShowDialog();
             this.Close();
         }
         private async void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void SeatSelectionForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

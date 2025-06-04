@@ -29,10 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DesktopGanjoorDbBrowser" Version="1.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
   </ItemGroup>
 
 </Project>

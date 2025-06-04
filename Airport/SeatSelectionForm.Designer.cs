@@ -92,6 +92,7 @@
             Controls.Add(lblInstruction);
             Name = "SeatSelectionForm";
             Text = "SeatSelectionForm";
+            Load += SeatSelectionForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
