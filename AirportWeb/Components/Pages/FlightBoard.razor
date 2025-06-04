@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using FlightStatusWeb.Components.Models
+@using AirportLib.Models
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager Nav
 
@@ -9,53 +9,74 @@
     <thead>
         <tr>
             <th>Time</th>
-            <th>Destination</th>
+            <th>From</th>
+            <th>To</th>
             <th>Flight</th>
-            <th>Gate</th>
             <th>Status</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Hello</td>
-        </tr>
-        @* @foreach (var flight in Flights)
+        @foreach (var flight in flights)
         {
             <tr>
-                <td>@flight.Time.ToShortTimeString()</td>
-                <td>@flight.Destination</td>
+                <td>@flight.DepartureTime.ToShortTimeString()</td>
+                <td>@flight.DepartureCity</td>
+                <td>@flight.ArrivalCity</td>
                 <td>@flight.FlightNumber</td>
-                <td>@flight.Gate</td>
                 <td>@flight.Status</td>
             </tr>
-        } *@
+        }
     </tbody>
 </table>
 
 @code {
-    // private HubConnection hubConnection;
-    // private List<Flight> Flights = new();
+    private HubConnection hubConnection;
+    private List<Flight> flights = new();
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     hubConnection = new HubConnectionBuilder()
-    //         .WithUrl(Nav.ToAbsoluteUri("/flighthub"))
-    //         .Build();
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitializedAsync");
+        var serverBaseUrl = "http://localhost:50866";
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(Nav.ToAbsoluteUri($"{serverBaseUrl}/flighthub"))
+            .WithAutomaticReconnect()
+            .Build();
 
-    //     hubConnection.On<Flight>("ReceiveFlightUpdate", (flight) =>
-    //     {
-    //         var existing = Flights.FirstOrDefault(f => f.FlightNumber == flight.FlightNumber);
-    //         if (existing != null)
-    //         {
-    //             existing.Status = flight.Status;
-    //         }
-    //         else
-    //         {
-    //             Flights.Add(flight);
-    //         }
-    //         StateHasChanged();
-    //     });
+        hubConnection.On<int, FlightStatus>("UpdateFlightStatus", (flightId, status) =>
+        {
+            var flight = flights.FirstOrDefault(f => f.Id == flightId);
+            if (flight != null)
+            {
+                flight.FlightNumber += "Hello";
+                flight.Status = status;
+                Console.WriteLine($"Flight {flight.FlightNumber} status updated to {status}");
+                InvokeAsync(StateHasChanged);
+            }
+        });
 
-    //     await hubConnection.StartAsync();
-    // }
+        hubConnection.On<List<Flight>>("ReceiveAllFlights", (newFlights) =>
+        {
+            Console.WriteLine($"Received {newFlights.Count} flights");
+            flights = newFlights;
+            InvokeAsync(StateHasChanged);
+        });
+
+        await hubConnection.StartAsync();
+        await hubConnection.InvokeAsync("GetAllFlights");
+        await hubConnection.InvokeAsync("RegisterDisplay");
+        Console.WriteLine($"Flights: {flights.Count}");
+        foreach (var flight in flights)
+        {
+            Console.WriteLine($"Flight: {flight.FlightNumber}");
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.InvokeAsync("UnregisterDisplay");
+            await hubConnection.DisposeAsync();
+        }
+    }
 }

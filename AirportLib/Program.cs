@@ -13,6 +13,7 @@ builder.Services.AddScoped<FlightOperationsService>();
 builder.Services.AddScoped<PassengerService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSignalR();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -100,4 +101,5 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers(); // REST API Controller-уудыг холбох
+app.MapHub<FlightHub>("/flighthub");
 app.Run();

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace AirportLib.Services
 {
-    public class FlightOperationsService(AppDbContext context)
+    public class FlightOperationsService(AppDbContext context, IHubContext<FlightHub> hubContext)
     {
         private readonly AppDbContext _context = context;
 
@@ -27,6 +27,9 @@ namespace AirportLib.Services
             flight.Status = newStatus;
             _context.Flights.Update(flight);
             await _context.SaveChangesAsync();
+            await hubContext
+                .Clients.Group("Display")
+                .SendAsync("UpdateFlightStatus", flightId, newStatus);
             return (true, "Нислэгийн төлөв амжилттай шинэчлэгдлээ.");
         }
     }
