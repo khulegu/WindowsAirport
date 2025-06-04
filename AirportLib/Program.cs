@@ -1,6 +1,7 @@
 ﻿using AirportLib.Data;
 using AirportLib.Models;
 using AirportLib.Services; // Custom Socket Server Service
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,30 @@ builder.Services.AddScoped<PassengerService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowSpecificOrigin",
+        builder =>
+            builder
+                .WithOrigins(
+                    "https://localhost:7025",
+                    "http://localhost:50866",
+                    "http://localhost:5188"
+                ) // Add all origins where your Blazor client might run
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+    ); // Essential for SignalR
+});
+
+builder.Services.AddResponseCompression(opts =>
+{
+    opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+        new[] { "application/octet-stream" }
+    );
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -95,9 +120,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHttpsRedirection();
-app.UseCors("AllowSpecificOrigins"); // CORS policy-г идэвхжүүлэх
 app.UseRouting();
+app.UseCors("AllowSpecificOrigin");
 app.UseAuthorization();
 
 app.MapControllers(); // REST API Controller-уудыг холбох
