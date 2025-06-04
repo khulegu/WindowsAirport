@@ -47,28 +47,26 @@
             var flight = flights.FirstOrDefault(f => f.Id == flightId);
             if (flight != null)
             {
-                flight.FlightNumber += "Hello";
                 flight.Status = status;
                 Console.WriteLine($"Flight {flight.FlightNumber} status updated to {status}");
-                InvokeAsync(StateHasChanged);
             }
+            InvokeAsync(StateHasChanged);
         });
 
         hubConnection.On<List<Flight>>("ReceiveAllFlights", (newFlights) =>
         {
-            Console.WriteLine($"Received {newFlights.Count} flights");
             flights = newFlights;
+            Console.WriteLine($"Received Flights: {flights.Count}");
+            foreach (var flight in flights)
+            {
+                Console.WriteLine($"Flight: {flight.FlightNumber}");
+            }
             InvokeAsync(StateHasChanged);
         });
 
         await hubConnection.StartAsync();
         await hubConnection.InvokeAsync("GetAllFlights");
         await hubConnection.InvokeAsync("RegisterDisplay");
-        Console.WriteLine($"Flights: {flights.Count}");
-        foreach (var flight in flights)
-        {
-            Console.WriteLine($"Flight: {flight.FlightNumber}");
-        }
     }
 
     public async ValueTask DisposeAsync()
