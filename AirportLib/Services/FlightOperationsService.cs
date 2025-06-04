@@ -4,25 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirportLib.Data;
-using AirportLib.Hubs;
 using AirportLib.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AirportLib.Services
 {
-    public class FlightOperationsService
+    public class FlightOperationsService(AppDbContext context)
     {
-        private readonly AppDbContext _context;
-        private readonly IHubContext<FlightInfoHub, IFlightInfoClient> _flightInfoHubContext;
-
-        public FlightOperationsService(
-            AppDbContext context,
-            IHubContext<FlightInfoHub, IFlightInfoClient> flightInfoHubContext
-        )
-        {
-            _context = context;
-            _flightInfoHubContext = flightInfoHubContext;
-        }
+        private readonly AppDbContext _context = context;
 
         public async Task<(bool Success, string Message)> UpdateFlightStatusAsync(
             int flightId,
@@ -38,15 +27,6 @@ namespace AirportLib.Services
             flight.Status = newStatus;
             _context.Flights.Update(flight);
             await _context.SaveChangesAsync();
-
-            // Бүх холбогдсон клиентүүдэд мэдээлэх (SignalR)
-            await _flightInfoHubContext
-                .Clients.Group($"flight-{flightId}")
-                .FlightStatusChanged(flightId, newStatus);
-            await _flightInfoHubContext
-                .Clients.Group("all-flight-displays")
-                .FlightStatusChanged(flightId, newStatus);
-
             return (true, "Нислэгийн төлөв амжилттай шинэчлэгдлээ.");
         }
     }
