@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AirportLib.Models;
 namespace Airport
 {
     public partial class SeatSelectionForm : Form
@@ -24,6 +25,7 @@ namespace Airport
             _apiClient = new CheckInApiClient("http://localhost:50866/"); // or use config
             LoadSeats();
         }
+
         private async void LoadSeats()
         {
             var seats = await _apiClient.GetSeatsAsync(_flightId);
@@ -84,8 +86,23 @@ namespace Airport
                 return;
             }
 
-            BoardingPassForm bpForm = new BoardingPassForm(/*passenger info*/);
+            var updatedBooking = await _apiClient.GetBookingAsync(_passport);
+            if (updatedBooking == null)
+            {
+                MessageBox.Show("Failed to load updated passenger info.");
+                return;
+            }
+            var flight = await _apiClient.GetFlightDetailsAsync(updatedBooking.FlightId);
+            if (flight == null)
+            {
+                MessageBox.Show("Flight not found");
+            }
+            BoardingPassForm bpForm = new BoardingPassForm(updatedBooking,flight);
             bpForm.ShowDialog();
+            this.Close();
+        }
+        private async void btnBack_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

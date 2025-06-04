@@ -1,6 +1,8 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
+using AirportLib.Models;
 
 public class CheckInApiClient
 {
@@ -35,6 +37,27 @@ public class CheckInApiClient
 
         return await response.Content.ReadFromJsonAsync<List<SeatInfo>>();
     }
+
+    public async Task<FlightDetails?> GetFlightDetailsAsync(int flightId)
+    {
+        var response = await _httpClient.GetAsync($"api/flights/{flightId}");
+        if (!response.IsSuccessStatusCode) return null;
+
+        var json = await response.Content.ReadAsStringAsync();
+        var root = JsonDocument.Parse(json).RootElement;
+
+        return new FlightDetails
+        {
+            Id = root.GetProperty("id").GetInt32(),
+            FlightNumber = root.GetProperty("flightNumber").GetString(),
+            DepartureCity = root.GetProperty("departureCity").GetString(),
+            ArrivalCity = root.GetProperty("arrivalCity").GetString(),
+            DepartureTime = root.GetProperty("departureTime").GetDateTime(),
+            ArrivalTime = root.GetProperty("arrivalTime").GetDateTime(),
+        };
+    }
+
+
 }
 
 // These classes should match the JSON structure
@@ -66,4 +89,13 @@ public class SeatInfo
 {
     public string SeatNumber { get; set; } = "";
     public bool IsOccupied { get; set; }
+}
+public class FlightDetails
+{
+    public int Id { get; set; }
+    public string FlightNumber { get; set; }
+    public string DepartureCity { get; set; }
+    public string ArrivalCity { get; set; }
+    public DateTime DepartureTime { get; set; }
+    public DateTime ArrivalTime { get; set; }
 }

@@ -98,7 +98,7 @@ namespace AirportLib.Services
         {
             return await context
                 .Bookings.Include(b => b.Flight)
-                .FirstOrDefaultAsync(b => b.PassportNumber == passportNumber && !b.IsCheckedIn);
+                .FirstOrDefaultAsync(b => b.PassportNumber == passportNumber);
         }
 
         /// <summary>

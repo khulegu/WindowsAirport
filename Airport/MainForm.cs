@@ -29,20 +29,27 @@ namespace Airport
                 MessageBox.Show("Please enter a passport number.");
                 return;
             }
-            var booking = await _apiClient.GetBookingAsync(passport);
 
+            var booking = await _apiClient.GetBookingAsync(passport);
             if (booking == null)
             {
                 lblStatus.Text = "Passenger not found";
                 return;
             }
 
+            if (booking.IsCheckedIn)
+            {
+                var flight = await _apiClient.GetFlightDetailsAsync(booking.FlightId);
+                if (flight == null)
+                {
+                    MessageBox.Show("Flight not found");
+                }
+                new BoardingPassForm(booking,flight).ShowDialog();
+                return;
+            }
+
             lblStatus.Text = $"Found: {booking.PassengerName} on flight {booking.FlightNumber}";
-
-            // Show seat selection form
-            var seatForm = new SeatSelectionForm(booking.FlightId, passport);
-            seatForm.ShowDialog();
+            new SeatSelectionForm(booking.FlightId, passport).ShowDialog();
         }
-
     }
 }

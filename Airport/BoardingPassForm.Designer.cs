@@ -32,9 +32,12 @@
             lblPassport = new Label();
             lblFlight = new Label();
             lblSeat = new Label();
-            btnPrint = new Button();
             btnFinish = new Button();
-            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            lblOrigin = new Label();
+            lblDestination = new Label();
+            lblDate = new Label();
+            lblTime = new Label();
+            btnPrint = new Button();
             SuspendLayout();
             // 
             // lblName
@@ -42,66 +45,104 @@
             lblName.AutoSize = true;
             lblName.Location = new Point(12, 9);
             lblName.Name = "lblName";
-            lblName.Size = new Size(56, 20);
+            lblName.Size = new Size(163, 20);
             lblName.TabIndex = 0;
-            lblName.Text = "Name: ";
+            lblName.Text = "NAME OF PASSENGER: ";
             // 
             // lblPassport
             // 
             lblPassport.AutoSize = true;
             lblPassport.Location = new Point(12, 40);
             lblPassport.Name = "lblPassport";
-            lblPassport.Size = new Size(71, 20);
+            lblPassport.Size = new Size(148, 20);
             lblPassport.TabIndex = 1;
-            lblPassport.Text = "Passport: ";
+            lblPassport.Text = "PASSPORT NUMBER: ";
             // 
             // lblFlight
             // 
             lblFlight.AutoSize = true;
-            lblFlight.Location = new Point(12, 76);
+            lblFlight.Location = new Point(12, 138);
             lblFlight.Name = "lblFlight";
-            lblFlight.Size = new Size(53, 20);
+            lblFlight.Size = new Size(127, 20);
             lblFlight.TabIndex = 2;
-            lblFlight.Text = "Flight: ";
+            lblFlight.Text = "FLIGHT NUMBER: ";
             // 
             // lblSeat
             // 
             lblSeat.AutoSize = true;
-            lblSeat.Location = new Point(12, 110);
+            lblSeat.Location = new Point(240, 138);
             lblSeat.Name = "lblSeat";
-            lblSeat.Size = new Size(45, 20);
+            lblSeat.Size = new Size(109, 20);
             lblSeat.TabIndex = 3;
-            lblSeat.Text = "Seat: ";
-            // 
-            // btnPrint
-            // 
-            btnPrint.Location = new Point(12, 409);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(94, 29);
-            btnPrint.TabIndex = 4;
-            btnPrint.Text = "Print Boarding Pass";
-            btnPrint.UseVisualStyleBackColor = true;
+            lblSeat.Text = "SEAT NUMBER:";
             // 
             // btnFinish
             // 
-            btnFinish.Location = new Point(230, 409);
+            btnFinish.Location = new Point(240, 170);
             btnFinish.Name = "btnFinish";
             btnFinish.Size = new Size(94, 29);
             btnFinish.TabIndex = 5;
             btnFinish.Text = "Close";
             btnFinish.UseVisualStyleBackColor = true;
+            btnFinish.Click += btnFinish_Click;
             // 
-            // printDocument1
+            // lblOrigin
             // 
-
+            lblOrigin.AutoSize = true;
+            lblOrigin.Location = new Point(12, 73);
+            lblOrigin.Name = "lblOrigin";
+            lblOrigin.Size = new Size(65, 20);
+            lblOrigin.TabIndex = 6;
+            lblOrigin.Text = "ORIGIN: ";
+            // 
+            // lblDestination
+            // 
+            lblDestination.AutoSize = true;
+            lblDestination.Location = new Point(240, 73);
+            lblDestination.Name = "lblDestination";
+            lblDestination.Size = new Size(109, 20);
+            lblDestination.TabIndex = 7;
+            lblDestination.Text = "DESTINATION: ";
+            // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Location = new Point(12, 104);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(52, 20);
+            lblDate.TabIndex = 8;
+            lblDate.Text = "DATE: ";
+            // 
+            // lblTime
+            // 
+            lblTime.AutoSize = true;
+            lblTime.Location = new Point(240, 104);
+            lblTime.Name = "lblTime";
+            lblTime.Size = new Size(45, 20);
+            lblTime.TabIndex = 9;
+            lblTime.Text = "TIME:";
+            // 
+            // btnPrint
+            // 
+            btnPrint.Location = new Point(12, 170);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(94, 29);
+            btnPrint.TabIndex = 10;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = true;
+            btnPrint.Click += btnPrint_Click;
             // 
             // BoardingPassForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(336, 450);
-            Controls.Add(btnFinish);
+            ClientSize = new Size(554, 294);
             Controls.Add(btnPrint);
+            Controls.Add(lblTime);
+            Controls.Add(lblDate);
+            Controls.Add(lblDestination);
+            Controls.Add(lblOrigin);
+            Controls.Add(btnFinish);
             Controls.Add(lblSeat);
             Controls.Add(lblFlight);
             Controls.Add(lblPassport);
@@ -118,8 +159,11 @@
         private Label lblPassport;
         private Label lblFlight;
         private Label lblSeat;
-        private Button btnPrint;
         private Button btnFinish;
-        private System.Drawing.Printing.PrintDocument printDocument1;
+        private Label lblOrigin;
+        private Label lblDestination;
+        private Label lblDate;
+        private Label lblTime;
+        private Button btnPrint;
     }
 }
