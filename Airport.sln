@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport", "Airport\Airport.csproj", "{37F79F7F-3D06-4400-9399-BB8614EE35F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportLib", "AirportLib\AirportLib.csproj", "{1D63BBCD-5A8A-4343-9B75-4BD614D463A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightStatusWeb", "AirportWeb\FlightStatusWeb.csproj", "{A37973F4-FE07-234D-DB61-87B3F45775D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1D63BBCD-5A8A-4343-9B75-4BD614D463A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D63BBCD-5A8A-4343-9B75-4BD614D463A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D63BBCD-5A8A-4343-9B75-4BD614D463A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37973F4-FE07-234D-DB61-87B3F45775D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37973F4-FE07-234D-DB61-87B3F45775D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37973F4-FE07-234D-DB61-87B3F45775D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37973F4-FE07-234D-DB61-87B3F45775D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
