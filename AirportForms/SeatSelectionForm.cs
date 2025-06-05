@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AirportServer.Models;
-using Microsoft.AspNetCore.SignalR.Client;
 
 namespace Airport
 {
@@ -18,7 +17,6 @@ namespace Airport
         private readonly CheckInApiClient _apiClient;
         private readonly int _flightId;
         private readonly string _passport;
-        private HubConnection? _hubConnection;
 
         private List<SeatInfo> _currentSeats = new();
         public SeatSelectionForm(int flightId, string passport)
@@ -32,7 +30,6 @@ namespace Airport
 
         private async void LoadSeats()
         {
-
             var seats = await _apiClient.GetSeatsAsync(_flightId);
             if (seats == null)
             {
@@ -128,35 +125,6 @@ namespace Airport
         private async void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-        private async Task ConnectToSignalR()
-        {
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:50866/seathub") // Adjust to your backend URL
-                .WithAutomaticReconnect()
-                .Build();
-
-            _hubConnection.On<List<SeatInfo>>("ReceiveSeatMapUpdate", seats =>
-            {
-                _currentSeats = seats;
-                Invoke(() => DisplaySeats(seats));
-            });
-
-            try
-            {
-                await _hubConnection.StartAsync();
-                await _hubConnection.InvokeAsync("JoinFlightGroup", _flightId.ToString());
-                Console.WriteLine("Connected to SignalR hub.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("SignalR холболт амжилтгүй: " + ex.Message);
-            }
-        }
-
-        private async void SeatSelectionForm_Load(object sender, EventArgs e)
-        {
-            await ConnectToSignalR();
         }
     }
 }
