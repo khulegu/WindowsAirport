@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AirportLib.Models;
+using AirportServer.Models;
 
 namespace Airport
 {
@@ -33,7 +33,8 @@ namespace Airport
             }
             else
             {
-                lblName.Text = $"Name: {_booking.PassengerDetails.FirstName} {_booking.PassengerDetails.LastName}";
+                lblName.Text =
+                    $"Name: {_booking.PassengerDetails.FirstName} {_booking.PassengerDetails.LastName}";
             }
 
             lblPassport.Text = $"PASSPORT NUMBER: {_booking.PassportNumber}";
@@ -63,13 +64,31 @@ namespace Airport
                 ev.Graphics.DrawString(lblPassport.Text, font, Brushes.Black, 100, y);
                 y += 30;
 
-                ev.Graphics.DrawString(lblOrigin.Text + "     " + lblDestination.Text, font, Brushes.Black, 100, y);
+                ev.Graphics.DrawString(
+                    lblOrigin.Text + "     " + lblDestination.Text,
+                    font,
+                    Brushes.Black,
+                    100,
+                    y
+                );
                 y += 30;
 
-                ev.Graphics.DrawString(lblDate.Text + "     " + lblTime.Text, font, Brushes.Black, 100, y);
+                ev.Graphics.DrawString(
+                    lblDate.Text + "     " + lblTime.Text,
+                    font,
+                    Brushes.Black,
+                    100,
+                    y
+                );
                 y += 30;
 
-                ev.Graphics.DrawString(lblFlight.Text + "     " + lblSeat.Text, font, Brushes.Black, 100, y);
+                ev.Graphics.DrawString(
+                    lblFlight.Text + "     " + lblSeat.Text,
+                    font,
+                    Brushes.Black,
+                    100,
+                    y
+                );
             };
 
             try
@@ -84,7 +103,6 @@ namespace Airport
                 MessageBox.Show("Printing failed: " + ex.Message);
             }
         }
-
 
         private async void btnFinish_Click(object sender, EventArgs e)
         {

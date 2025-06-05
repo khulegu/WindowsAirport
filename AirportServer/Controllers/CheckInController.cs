@@ -1,10 +1,10 @@
-using AirportLib.Data;
-using AirportLib.Services;
+using AirportServer.Data;
+using AirportServer.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
-namespace AirportLib.Controllers;
+namespace AirportServer.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

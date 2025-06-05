@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AirportLib.Models;
+using AirportServer.Models;
+
 namespace Airport
 {
     public partial class SeatSelectionForm : Form
@@ -59,13 +60,24 @@ namespace Airport
                 {
                     selectedSeat = seat;
                     lblSelectedSeat.Text = $"Сонгосон: {seat.SeatNumber}";
-                    lblInstruction.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0); ;
+                    lblInstruction.Font = new Font(
+                        "Segoe UI",
+                        9F,
+                        FontStyle.Bold,
+                        GraphicsUnit.Point,
+                        0
+                    );
+                    ;
                 };
 
-                btn.Location = new Point((i % cols) * (size + margin), (i / cols) * (size + margin));
+                btn.Location = new Point(
+                    (i % cols) * (size + margin),
+                    (i / cols) * (size + margin)
+                );
                 panelSeats.Controls.Add(btn);
             }
         }
+
         private async void btnConfirm_Click(object sender, EventArgs e)
         {
             if (selectedSeat == null)
@@ -78,13 +90,18 @@ namespace Airport
             {
                 FlightId = _flightId,
                 PassportNumber = _passport,
-                SeatNumber = selectedSeat.SeatNumber
+                SeatNumber = selectedSeat.SeatNumber,
             };
             var (success, message) = await _apiClient.AssignSeatAsync(request);
 
             if (!success)
             {
-                MessageBox.Show($"Суудал бүртгүүлэлт амжилтгүй: {message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    $"Суудал бүртгүүлэлт амжилтгүй: {message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
                 return;
             }
 
@@ -103,15 +120,12 @@ namespace Airport
             bpForm.ShowDialog();
             this.Close();
         }
+
         private async void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void SeatSelectionForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void SeatSelectionForm_Load(object sender, EventArgs e) { }
     }
-
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent; // Зэрэг ажиллагааг зохицуулах
-using AirportLib.Data;
-using AirportLib.Models;
+using AirportServer.Data;
+using AirportServer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AirportLib.Services
+namespace AirportServer.Services
 {
     public class CheckInService(AppDbContext context)
     {

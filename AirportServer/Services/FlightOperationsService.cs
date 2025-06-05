@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AirportLib.Data;
-using AirportLib.Models;
+using AirportServer.Data;
+using AirportServer.Models;
 using Microsoft.AspNetCore.SignalR;
 
-namespace AirportLib.Services
+namespace AirportServer.Services
 {
     public class FlightOperationsService(AppDbContext context, IHubContext<FlightHub> hubContext)
     {

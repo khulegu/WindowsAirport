@@ -1,6 +1,6 @@
-﻿using AirportLib.Data;
-using AirportLib.Models;
-using AirportLib.Services; // Custom Socket Server Service
+﻿using AirportServer.Data;
+using AirportServer.Models;
+using AirportServer.Services; // Custom Socket Server Service
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +44,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc(
         "v1",
-        new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Airport API", Version = "v1" }
+        new Microsoft.OpenApi.Models.OpenApiInfo { Title = "AirportForms API", Version = "v1" }
     );
 });
 

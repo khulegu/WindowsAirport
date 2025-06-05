@@ -7,10 +7,11 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <RootNamespace>Airport</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AirportLib\AirportLib.csproj" />
+    <ProjectReference Include="..\AirportServer\AirportServer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

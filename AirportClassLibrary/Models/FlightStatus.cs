@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirportLib.Models
+namespace AirportServer.Models
 {
     public enum FlightStatus
     {
@@ -12,6 +12,6 @@ namespace AirportLib.Models
         Boarding,
         Departed,
         Delayed,
-        Cancelled
+        Cancelled,
     }
 }

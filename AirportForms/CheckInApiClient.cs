@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AirportLib.Models;
+using AirportServer.Models;
 
 public class CheckInApiClient
 {
@@ -15,7 +15,9 @@ public class CheckInApiClient
 
     public async Task<BookingResponse?> GetBookingAsync(string passportNumber)
     {
-        var response = await _httpClient.GetAsync($"api/checkin/booking?passportNumber={passportNumber}");
+        var response = await _httpClient.GetAsync(
+            $"api/checkin/booking?passportNumber={passportNumber}"
+        );
         if (!response.IsSuccessStatusCode)
             return null;
 
@@ -29,6 +31,7 @@ public class CheckInApiClient
 
         return (response.IsSuccessStatusCode, body);
     }
+
     public async Task<List<SeatInfo>?> GetSeatsAsync(int flightId)
     {
         var response = await _httpClient.GetAsync($"api/checkin/seats?flightId={flightId}");
@@ -41,7 +44,8 @@ public class CheckInApiClient
     public async Task<FlightDetails?> GetFlightDetailsAsync(int flightId)
     {
         var response = await _httpClient.GetAsync($"api/flights/{flightId}");
-        if (!response.IsSuccessStatusCode) return null;
+        if (!response.IsSuccessStatusCode)
+            return null;
 
         var json = await response.Content.ReadAsStringAsync();
         var root = JsonDocument.Parse(json).RootElement;
@@ -56,8 +60,6 @@ public class CheckInApiClient
             ArrivalTime = root.GetProperty("arrivalTime").GetDateTime(),
         };
     }
-
-
 }
 
 // These classes should match the JSON structure
@@ -85,11 +87,13 @@ public class AssignSeatRequest
     public string PassportNumber { get; set; } = "";
     public string SeatNumber { get; set; } = "";
 }
+
 public class SeatInfo
 {
     public string SeatNumber { get; set; } = "";
     public bool IsOccupied { get; set; }
 }
+
 public class FlightDetails
 {
     public int Id { get; set; }

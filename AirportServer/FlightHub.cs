@@ -1,5 +1,5 @@
-using AirportLib.Data;
-using AirportLib.Models;
+using AirportServer.Data;
+using AirportServer.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
