@@ -58,7 +58,8 @@ namespace Airport
                 btn.Click += (s, e) =>
                 {
                     selectedSeat = seat;
-                    lblSelectedSeat.Text = $"Selected: {seat.SeatNumber}";
+                    lblSelectedSeat.Text = $"Сонгосон: {seat.SeatNumber}";
+                    lblInstruction.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0); ;
                 };
 
                 btn.Location = new Point((i % cols) * (size + margin), (i / cols) * (size + margin));
@@ -69,10 +70,10 @@ namespace Airport
         {
             if (selectedSeat == null)
             {
-                MessageBox.Show("Please select a seat first.");
+                MessageBox.Show("Та суудлаа эхэлж сонгоно уу.");
                 return;
             }
-            MessageBox.Show($"Passport: {_passport}, FlightId: {_flightId}");
+            MessageBox.Show($"Пасспортны дугаар: {_passport}, Нислэгиийн дугаар: {_flightId}");
             var request = new AssignSeatRequest
             {
                 FlightId = _flightId,
@@ -83,20 +84,20 @@ namespace Airport
 
             if (!success)
             {
-                MessageBox.Show($"Seat assignment failed: {message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Суудал бүртгүүлэлт амжилтгүй: {message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var updatedBooking = await _apiClient.GetBookingAsync(_passport);
             if (updatedBooking == null)
             {
-                MessageBox.Show("Failed to load updated passenger info.");
+                MessageBox.Show("Зорчигчийн мэдээллийг оруулахад алдаа гарлаа.");
                 return;
             }
             var flight = await _apiClient.GetFlightDetailsAsync(updatedBooking.FlightId);
             if (flight == null)
             {
-                MessageBox.Show("Flight not found");
+                MessageBox.Show("Нислэг олдсонгүй");
             }
             BoardingPassForm bpForm = new BoardingPassForm(updatedBooking, flight);
             bpForm.ShowDialog();

@@ -38,26 +38,28 @@
             // lblPassport
             // 
             lblPassport.AutoSize = true;
-            lblPassport.Location = new Point(12, 9);
+            lblPassport.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPassport.Location = new Point(28, 19);
             lblPassport.Name = "lblPassport";
-            lblPassport.Size = new Size(163, 20);
+            lblPassport.Size = new Size(190, 25);
             lblPassport.TabIndex = 0;
-            lblPassport.Text = "Enter Passport Number:";
+            lblPassport.Text = "Пасспортны дугаар:";
             // 
             // txtPassport
             // 
-            txtPassport.Location = new Point(12, 32);
+            txtPassport.Location = new Point(28, 47);
             txtPassport.Name = "txtPassport";
             txtPassport.Size = new Size(361, 27);
             txtPassport.TabIndex = 1;
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(12, 65);
+            btnSearch.AutoSize = true;
+            btnSearch.Location = new Point(28, 125);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(94, 29);
+            btnSearch.Size = new Size(119, 30);
             btnSearch.TabIndex = 2;
-            btnSearch.Text = "Search Ticket";
+            btnSearch.Text = "Тасалбар хайх";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
             // 
@@ -72,23 +74,27 @@
             // 
             // panelContainer
             // 
-            panelContainer.Location = new Point(12, 134);
+            panelContainer.Location = new Point(12, 161);
             panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(758, 304);
+            panelContainer.Size = new Size(692, 277);
             panelContainer.TabIndex = 4;
+            panelContainer.Paint += panelContainer_Paint;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.GradientInactiveCaption;
+            ClientSize = new Size(721, 450);
             Controls.Add(panelContainer);
             Controls.Add(lblStatus);
             Controls.Add(btnSearch);
             Controls.Add(txtPassport);
             Controls.Add(lblPassport);
             Name = "MainForm";
-            Text = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Онгоцны билет захиалгын систем";
+            KeyDown += textPasword_keydown;
             ResumeLayout(false);
             PerformLayout();
         }

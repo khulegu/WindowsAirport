@@ -21,19 +21,52 @@ namespace Airport
 
         }
 
+        private async void textPasword_keydown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string passport = txtPassport.Text;
+                if (string.IsNullOrEmpty(passport))
+                {
+                    MessageBox.Show("Пасспортны дугаараа заавал оруулна уу");
+                    return;
+                }
+
+                var booking = await _apiClient.GetBookingAsync(passport);
+                if (booking == null)
+                {
+                    lblStatus.Text = "Зорчигч олдсонгүй";
+                    return;
+                }
+
+                if (booking.IsCheckedIn)
+                {
+                    var flight = await _apiClient.GetFlightDetailsAsync(booking.FlightId);
+                    if (flight == null)
+                    {
+                        MessageBox.Show("Нислэгийн захиалсан онгоц олдсонгүй ");
+                    }
+                    new BoardingPassForm(booking, flight).ShowDialog();
+                    return;
+                }
+
+                lblStatus.Text = $"Found: {booking.PassengerName} on flight {booking.FlightNumber}";
+                new SeatSelectionForm(booking.FlightId, passport).ShowDialog();
+            }
+        }
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             string passport = txtPassport.Text;
             if (string.IsNullOrEmpty(passport))
             {
-                MessageBox.Show("Please enter a passport number.");
+                MessageBox.Show("Пасспортны дугаараа заавал оруулна уу");
                 return;
             }
 
             var booking = await _apiClient.GetBookingAsync(passport);
             if (booking == null)
             {
-                lblStatus.Text = "Passenger not found";
+                lblStatus.Text = "Зорчигч олдсонгүй";
                 return;
             }
 
@@ -42,14 +75,19 @@ namespace Airport
                 var flight = await _apiClient.GetFlightDetailsAsync(booking.FlightId);
                 if (flight == null)
                 {
-                    MessageBox.Show("Flight not found");
+                    MessageBox.Show("Нислэгийн захиалсан онгоц олдсонгүй ");
                 }
-                new BoardingPassForm(booking,flight).ShowDialog();
+                new BoardingPassForm(booking, flight).ShowDialog();
                 return;
             }
 
             lblStatus.Text = $"Found: {booking.PassengerName} on flight {booking.FlightNumber}";
             new SeatSelectionForm(booking.FlightId, passport).ShowDialog();
+        }
+
+        private void panelContainer_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

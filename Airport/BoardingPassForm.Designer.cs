@@ -45,44 +45,44 @@
             lblName.AutoSize = true;
             lblName.Location = new Point(12, 9);
             lblName.Name = "lblName";
-            lblName.Size = new Size(163, 20);
+            lblName.Size = new Size(129, 20);
             lblName.TabIndex = 0;
-            lblName.Text = "NAME OF PASSENGER: ";
+            lblName.Text = "Зорчигчийн нэр: ";
             // 
             // lblPassport
             // 
             lblPassport.AutoSize = true;
             lblPassport.Location = new Point(12, 40);
             lblPassport.Name = "lblPassport";
-            lblPassport.Size = new Size(148, 20);
+            lblPassport.Size = new Size(152, 20);
             lblPassport.TabIndex = 1;
-            lblPassport.Text = "PASSPORT NUMBER: ";
+            lblPassport.Text = "Пасспортны дугаар: ";
             // 
             // lblFlight
             // 
             lblFlight.AutoSize = true;
             lblFlight.Location = new Point(12, 138);
             lblFlight.Name = "lblFlight";
-            lblFlight.Size = new Size(127, 20);
+            lblFlight.Size = new Size(141, 20);
             lblFlight.TabIndex = 2;
-            lblFlight.Text = "FLIGHT NUMBER: ";
+            lblFlight.Text = "Нислэгийн дугаар: ";
             // 
             // lblSeat
             // 
             lblSeat.AutoSize = true;
             lblSeat.Location = new Point(240, 138);
             lblSeat.Name = "lblSeat";
-            lblSeat.Size = new Size(109, 20);
+            lblSeat.Size = new Size(121, 20);
             lblSeat.TabIndex = 3;
-            lblSeat.Text = "SEAT NUMBER:";
+            lblSeat.Text = "Суудлын дугаар:";
             // 
             // btnFinish
             // 
-            btnFinish.Location = new Point(240, 170);
+            btnFinish.Location = new Point(240, 192);
             btnFinish.Name = "btnFinish";
             btnFinish.Size = new Size(94, 29);
             btnFinish.TabIndex = 5;
-            btnFinish.Text = "Close";
+            btnFinish.Text = "Хаах";
             btnFinish.UseVisualStyleBackColor = true;
             btnFinish.Click += btnFinish_Click;
             // 
@@ -91,44 +91,44 @@
             lblOrigin.AutoSize = true;
             lblOrigin.Location = new Point(12, 73);
             lblOrigin.Name = "lblOrigin";
-            lblOrigin.Size = new Size(65, 20);
+            lblOrigin.Size = new Size(108, 20);
             lblOrigin.TabIndex = 6;
-            lblOrigin.Text = "ORIGIN: ";
+            lblOrigin.Text = "Хөдлөх газар: ";
             // 
             // lblDestination
             // 
             lblDestination.AutoSize = true;
             lblDestination.Location = new Point(240, 73);
             lblDestination.Name = "lblDestination";
-            lblDestination.Size = new Size(109, 20);
+            lblDestination.Size = new Size(97, 20);
             lblDestination.TabIndex = 7;
-            lblDestination.Text = "DESTINATION: ";
+            lblDestination.Text = "Хүрэх газар: ";
             // 
             // lblDate
             // 
             lblDate.AutoSize = true;
             lblDate.Location = new Point(12, 104);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(52, 20);
+            lblDate.Size = new Size(116, 20);
             lblDate.TabIndex = 8;
-            lblDate.Text = "DATE: ";
+            lblDate.Text = "Хөдлөх он сар: ";
             // 
             // lblTime
             // 
             lblTime.AutoSize = true;
             lblTime.Location = new Point(240, 104);
             lblTime.Name = "lblTime";
-            lblTime.Size = new Size(45, 20);
+            lblTime.Size = new Size(37, 20);
             lblTime.TabIndex = 9;
-            lblTime.Text = "TIME:";
+            lblTime.Text = "Цаг:";
             // 
             // btnPrint
             // 
-            btnPrint.Location = new Point(12, 170);
+            btnPrint.Location = new Point(12, 192);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(94, 29);
             btnPrint.TabIndex = 10;
-            btnPrint.Text = "Print";
+            btnPrint.Text = "Хэвлэх";
             btnPrint.UseVisualStyleBackColor = true;
             btnPrint.Click += btnPrint_Click;
             // 
@@ -136,7 +136,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(554, 294);
+            ClientSize = new Size(513, 294);
             Controls.Add(btnPrint);
             Controls.Add(lblTime);
             Controls.Add(lblDate);
@@ -148,7 +148,8 @@
             Controls.Add(lblPassport);
             Controls.Add(lblName);
             Name = "BoardingPassForm";
-            Text = "BoardingPassForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Нислэгийн мэдээлэл";
             ResumeLayout(false);
             PerformLayout();
         }

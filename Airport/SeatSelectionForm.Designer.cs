@@ -38,60 +38,70 @@
             // lblInstruction
             // 
             lblInstruction.AutoSize = true;
-            lblInstruction.Location = new Point(12, 9);
+            lblInstruction.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblInstruction.Location = new Point(12, 24);
             lblInstruction.Name = "lblInstruction";
-            lblInstruction.Size = new Size(95, 20);
+            lblInstruction.Size = new Size(171, 20);
             lblInstruction.TabIndex = 0;
-            lblInstruction.Text = "Select a seat:";
+            lblInstruction.Text = "Та суудлаа сонгоно уу:";
             // 
             // panelSeats
             // 
-            panelSeats.Location = new Point(12, 32);
+            panelSeats.AutoScroll = true;
+            panelSeats.BackColor = SystemColors.ControlLightLight;
+            panelSeats.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            panelSeats.Location = new Point(89, 57);
             panelSeats.Name = "panelSeats";
-            panelSeats.Size = new Size(595, 275);
+            panelSeats.Size = new Size(217, 275);
             panelSeats.TabIndex = 1;
             // 
             // lblSelectedSeat
             // 
             lblSelectedSeat.AutoSize = true;
-            lblSelectedSeat.Location = new Point(12, 325);
+            lblSelectedSeat.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSelectedSeat.Location = new Point(12, 360);
             lblSelectedSeat.Name = "lblSelectedSeat";
-            lblSelectedSeat.Size = new Size(109, 20);
+            lblSelectedSeat.Size = new Size(80, 20);
             lblSelectedSeat.TabIndex = 0;
-            lblSelectedSeat.Text = "Selected: None";
+            lblSelectedSeat.Text = "Сонгосон:";
             // 
             // btnConfirm
             // 
-            btnConfirm.Location = new Point(12, 348);
+            btnConfirm.AutoSize = true;
+            btnConfirm.BackColor = Color.PaleGreen;
+            btnConfirm.Location = new Point(3, 422);
             btnConfirm.Name = "btnConfirm";
-            btnConfirm.Size = new Size(94, 29);
+            btnConfirm.Size = new Size(128, 30);
             btnConfirm.TabIndex = 2;
-            btnConfirm.Text = "Confirm Selection";
-            btnConfirm.UseVisualStyleBackColor = true;
+            btnConfirm.Text = "Баталгаажуулах";
+            btnConfirm.UseVisualStyleBackColor = false;
             btnConfirm.Click += btnConfirm_Click;
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(112, 348);
+            btnBack.BackColor = SystemColors.Control;
+            btnBack.Location = new Point(146, 423);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(94, 29);
             btnBack.TabIndex = 3;
-            btnBack.Text = "Back";
-            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Text = "Буцах";
+            btnBack.UseVisualStyleBackColor = false;
             btnBack.Click += btnBack_Click;
             // 
             // SeatSelectionForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.GradientInactiveCaption;
+            ClientSize = new Size(402, 464);
             Controls.Add(btnBack);
             Controls.Add(btnConfirm);
             Controls.Add(lblSelectedSeat);
             Controls.Add(panelSeats);
             Controls.Add(lblInstruction);
             Name = "SeatSelectionForm";
-            Text = "SeatSelectionForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Суудал сонгох";
             Load += SeatSelectionForm_Load;
             ResumeLayout(false);
             PerformLayout();
