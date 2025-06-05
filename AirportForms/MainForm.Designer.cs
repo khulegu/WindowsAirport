@@ -32,7 +32,7 @@
             txtPassport = new TextBox();
             btnSearch = new Button();
             lblStatus = new Label();
-            panelContainer = new Panel();
+            btnStatus = new Button();
             SuspendLayout();
             // 
             // lblPassport
@@ -66,27 +66,30 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(12, 97);
+            lblStatus.Location = new Point(28, 93);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 20);
             lblStatus.TabIndex = 3;
             lblStatus.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panelContainer
+            // btnStatus
             // 
-            panelContainer.Location = new Point(12, 161);
-            panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(692, 277);
-            panelContainer.TabIndex = 4;
-            panelContainer.Paint += panelContainer_Paint;
+            btnStatus.AutoSize = true;
+            btnStatus.Location = new Point(28, 161);
+            btnStatus.Name = "btnStatus";
+            btnStatus.Size = new Size(119, 30);
+            btnStatus.TabIndex = 4;
+            btnStatus.Text = "Нислэг хянах";
+            btnStatus.UseVisualStyleBackColor = true;
+            btnStatus.Click += btnStatus_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
-            ClientSize = new Size(721, 450);
-            Controls.Add(panelContainer);
+            ClientSize = new Size(417, 450);
+            Controls.Add(btnStatus);
             Controls.Add(lblStatus);
             Controls.Add(btnSearch);
             Controls.Add(txtPassport);
@@ -106,5 +109,6 @@
         private Button btnSearch;
         private Label lblStatus;
         private Panel panelContainer;
+        private Button btnStatus;
     }
 }
