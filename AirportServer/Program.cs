@@ -127,5 +127,4 @@ app.UseAuthorization();
 
 app.MapControllers(); // REST API Controller-уудыг холбох
 app.MapHub<FlightHub>("/flighthub");
-app.MapHub<SeatHub>("/seathub");
 app.Run();

@@ -10,13 +10,11 @@ namespace AirportServer.Controllers;
 [Route("api/[controller]")]
 public class CheckInController(
     CheckInService checkInService,
-    AppDbContext dbContext,
-    IHubContext<SeatHub> seatHubContext
+    AppDbContext dbContext
 ) : ControllerBase
 {
     private readonly CheckInService _checkInService = checkInService;
     private readonly AppDbContext _dbContext = dbContext;
-    private readonly IHubContext<SeatHub> _seatHubContext = seatHubContext;
 
     [HttpGet("booking")]
     public async Task<IActionResult> GetBooking([FromQuery] string passportNumber)
@@ -104,8 +102,6 @@ public class CheckInController(
                         : null,
                 });
 
-                await _seatHubContext.Clients.Group($"flight-{request.FlightId}")
-                    .SendAsync("SeatMapUpdated", seatMapDto);
             }
         }
 

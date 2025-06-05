@@ -102,7 +102,6 @@
             Name = "SeatSelectionForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Суудал сонгох";
-            Load += SeatSelectionForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -75,7 +75,7 @@ namespace Airport
                 var flight = await _apiClient.GetFlightDetailsAsync(booking.FlightId);
                 if (flight == null)
                 {
-                    MessageBox.Show("Нислэгийн захиалсан онгоц олдсонгүй ");
+                    MessageBox.Show("Нислэг олдсонгүй ");
                 }
                 new BoardingPassForm(booking, flight).ShowDialog();
                 return;
