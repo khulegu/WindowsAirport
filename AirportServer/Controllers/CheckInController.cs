@@ -1,24 +1,23 @@
 using AirportServer.Data;
 using AirportServer.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AirportServer.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CheckInController(CheckInService checkInService, AppDbContext dbContext)
-    : ControllerBase
+public class CheckInController(
+    CheckInService checkInService,
+    AppDbContext dbContext,
+    IHubContext<SeatHub> seatHubContext
+) : ControllerBase
 {
     private readonly CheckInService _checkInService = checkInService;
     private readonly AppDbContext _dbContext = dbContext;
+    private readonly IHubContext<SeatHub> _seatHubContext = seatHubContext;
 
-    /// <summary>
-    /// Тийзний мэдээллийг авах
-    /// </summary>
-    /// <param name="passportNumber">Зорчигчийн паспортын дугаар</param>
-    /// <returns>Тийзний мэдээлэл</returns>
     [HttpGet("booking")]
     public async Task<IActionResult> GetBooking([FromQuery] string passportNumber)
     {
@@ -29,26 +28,23 @@ public class CheckInController(CheckInService checkInService, AppDbContext dbCon
         if (booking == null)
             return NotFound("Захиалга олдсонгүй эсвэл зорчигч бүртгүүлсэн байна.");
 
-        // Зорчигчийн нэмэлт мэдээллийг авах
         var passenger = await _dbContext.Passengers.FirstOrDefaultAsync(p =>
             p.PassportNumber == passportNumber
         );
 
-        return Ok(
-            new
-            {
-                booking.Id,
-                booking.FlightId,
-                booking.Flight?.FlightNumber,
-                booking.PassportNumber,
-                booking.PassengerName,
-                PassengerDetails = passenger != null
-                    ? new { passenger.FirstName, passenger.LastName }
-                    : null,
-                booking.IsCheckedIn,
-                booking.AssignedSeatNumber,
-            }
-        );
+        return Ok(new
+        {
+            booking.Id,
+            booking.FlightId,
+            booking.Flight?.FlightNumber,
+            booking.PassportNumber,
+            booking.PassengerName,
+            PassengerDetails = passenger != null
+                ? new { passenger.FirstName, passenger.LastName }
+                : null,
+            booking.IsCheckedIn,
+            booking.AssignedSeatNumber,
+        });
     }
 
     [HttpGet("seats")]
@@ -94,7 +90,6 @@ public class CheckInController(CheckInService checkInService, AppDbContext dbCon
                 passengerName = booking.PassengerName;
         }
 
-        // Мэдээллийн дэлгэцүүдэд суудлын газрын зургийг шинэчлэх (амжилттай бол)
         if (success)
         {
             var flight = await _checkInService.GetFlightWithSeatsAsync(request.FlightId);
@@ -108,11 +103,15 @@ public class CheckInController(CheckInService checkInService, AppDbContext dbCon
                         ? $"{s.AssignedPassenger.FirstName} {s.AssignedPassenger.LastName}"
                         : null,
                 });
+
+                await _seatHubContext.Clients.Group($"flight-{request.FlightId}")
+                    .SendAsync("SeatMapUpdated", seatMapDto);
             }
         }
 
         if (!success)
             return BadRequest(new { Message = message });
+
         return Ok(new { Message = message, BoardingPass = boardingPass });
     }
 }

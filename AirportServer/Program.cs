@@ -1,4 +1,5 @@
-﻿using AirportServer.Data;
+﻿using AirportServer;
+using AirportServer.Data;
 using AirportServer.Models;
 using AirportServer.Services; // Custom Socket Server Service
 using Microsoft.AspNetCore.ResponseCompression;
@@ -23,14 +24,14 @@ builder.Services.AddCors(options =>
         builder =>
             builder
                 .WithOrigins(
-                    "https://localhost:7025",
+                    "https://localhost:7023",
                     "http://localhost:50866",
                     "http://localhost:5188"
-                ) // Add all origins where your Blazor client might run
+                )
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
-    ); // Essential for SignalR
+    ); 
 });
 
 builder.Services.AddResponseCompression(opts =>
@@ -126,4 +127,5 @@ app.UseAuthorization();
 
 app.MapControllers(); // REST API Controller-уудыг холбох
 app.MapHub<FlightHub>("/flighthub");
+app.MapHub<SeatHub>("/seathub");
 app.Run();

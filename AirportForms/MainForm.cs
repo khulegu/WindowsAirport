@@ -85,9 +85,9 @@ namespace Airport
             new SeatSelectionForm(booking.FlightId, passport).ShowDialog();
         }
 
-        private void panelContainer_Paint(object sender, PaintEventArgs e)
+        private void btnStatus_Click(object sender, EventArgs e)
         {
-
+            new FlightStatusForm().ShowDialog();
         }
     }
 }

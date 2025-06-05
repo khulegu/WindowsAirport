@@ -48,16 +48,16 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 46);
+            dataGridView1.Location = new Point(12, 32);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(748, 188);
+            dataGridView1.Size = new Size(941, 297);
             dataGridView1.TabIndex = 0;
             // 
             // cmbStatus
             // 
             cmbStatus.FormattingEnabled = true;
-            cmbStatus.Location = new Point(124, 237);
+            cmbStatus.Location = new Point(123, 342);
             cmbStatus.Name = "cmbStatus";
             cmbStatus.Size = new Size(151, 28);
             cmbStatus.TabIndex = 2;
@@ -65,7 +65,7 @@
             // lblChangeStatus
             // 
             lblChangeStatus.AutoSize = true;
-            lblChangeStatus.Location = new Point(12, 240);
+            lblChangeStatus.Location = new Point(12, 345);
             lblChangeStatus.Name = "lblChangeStatus";
             lblChangeStatus.Size = new Size(106, 20);
             lblChangeStatus.TabIndex = 3;
@@ -73,7 +73,7 @@
             // 
             // btnUpdateStatus
             // 
-            btnUpdateStatus.Location = new Point(12, 287);
+            btnUpdateStatus.Location = new Point(291, 341);
             btnUpdateStatus.Name = "btnUpdateStatus";
             btnUpdateStatus.Size = new Size(94, 29);
             btnUpdateStatus.TabIndex = 4;
@@ -86,7 +86,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(965, 450);
             Controls.Add(btnUpdateStatus);
             Controls.Add(lblChangeStatus);
             Controls.Add(cmbStatus);

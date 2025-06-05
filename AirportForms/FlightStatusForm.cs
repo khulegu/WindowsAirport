@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AirportLib.Models;
+using AirportServer.Models;
+
 
 namespace Airport
 {
@@ -64,5 +65,6 @@ namespace Airport
                 MessageBox.Show("Error updating status: " + ex.Message);
             }
         }
+
     }
 }
