@@ -16,8 +16,12 @@ Server-г ажиллуулах:
 dotnet run --project AirportServer
 ```
 
+http://localhost:50866/swagger/index.html
+
 Dashboard-г ажиллуулах:
 
 ```
 dotnet run --project Dashboard
 ```
+
+http://localhost:5188
